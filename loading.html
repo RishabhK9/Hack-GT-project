@@ -1,52 +1,48 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <title>Loading Page</title>
-    <!-- <script src="prompt.js"></script> -->
     <link rel="stylesheet" type="text/css" href="style.css">
-    <link rel="OpenAI" href="openai">
-</head>
-<body>
-        <div class="container">
-        <div class="loader"></div>
-        <script type="module">
-            import OpenAI from 'openai';
+    <script>
+        document.addEventListener("DOMContentLoaded", async function () {
+            console.log("Sending data to the server...");
 
-            document.addEventListener("DOMContentLoaded", async function () {
-                const openai = new OpenAI({
-                    apiKey: "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"
+            var skillTopic = "Java";
+            var numDays = 10;
+            var prompt = "Give me a plan with resources to learn " + skillTopic + " in " + numDays + " days in a table format. The table should have four columns. The first column should include the day number (say including the word Day in each row), the second column should include the topic, the third column should include multiple resources with specific links and titles, and the fourth column should include multiple tasks. The second column should only include the topic to be learned. The third column should only include multiple recommended resources to learn that topic. The fourth column should only include the multiple tasks that should be taken to learn the corresponding topic for each day. Give an equal amount of tasks and resources but make sure to give multiple. Please surround strings with double quotes. Please use real links. Set the temperature setting to 0.1.";
+
+            try {
+                console.log(JSON.stringify(prompt,0,2))
+                const response = await fetch('http://localhost:3000', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ prompt: prompt })
                 });
-                console.log("iterating processChat");
-                var skillTopic = "Java";
-                var numDays = 10;
-                var prompt = "Give me a plan with resources to learn " + skillTopic + " in " + numDays + " days in a table format. The table should have four columns. The first column should include the day number (say including the word Day in each row), the second column should include the topic, the third column should include multiple resources with specific links and titles, and the fourth column should include multiple tasks. The second column should only include the topic to be learned. The third column should only include multiple recommended resources to learn that topic. The fourth column should only include the multiple tasks that should be taken to learn the corresponding topic for each day. Give an equal amount of tasks and resources but make sure to give multiple. Please surround strings with double quotes. Please use real links. Set the temperature setting to 0.1.";
-          
-                const chatCompletion = await openai.chat.completions.create({
-                    model: "gpt-3.5-turbo",
-                    messages: [{ role: "user", content: prompt }],
-                });
-          
-                const output = chatCompletion.choices[0].message.content;
-                const separatedOutput = output.split("Day ");
-          
-                for (let i = 0; i < separatedOutput.length; i++) {
-                    let result = separatedOutput[i].split("|");
-                    for (let j = 0; j < result.length; j++) {
-                        result[j] = result[j].trim();
-                        if (result[j].trim() === "" || result[j].trim() === '') {
-                            result.splice(j, 1);
-                        }
-                    }
-                    separatedOutput[i] = result;
+
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
                 }
-          
-                separatedOutput.splice(0, 1);
-                separatedOutput.shift();
-            });
-        </script>
-            <h1>Loading...</h1>
-            <p>Please wait while we retrieve the data...</p>
-        </div>
-    </body>
-</html>
 
+                const data = await response.json();
+                // Process the received data as needed
+                console.log(data);
+
+            } catch (error) {
+                console.log("There was a problem with the fetch operation:", error.message);
+            }
+        });
+    </script>
+</head>
+
+<body>
+    <div class="container">
+        <div class="loader"></div>
+        <h1>Loading...</h1>
+        <p>Please wait while we retrieve the data...</p>
+    </div>
+</body>
+
+</html>
