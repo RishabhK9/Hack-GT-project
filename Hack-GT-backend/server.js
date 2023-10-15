@@ -4,19 +4,17 @@ const OpenAI = require('openai');
 const cors = require('cors');
 
 const app = express();
-app.use(cors()); // This enables CORS for all routes
+app.use(cors());
 app.use(bodyParser.json());
 
 class RoadMapper {
-    async processChat() {
+    async processChat(skillTopic, numDays) {  // Accepting arguments here
         const openai = new OpenAI({
-            apiKey: "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"
+            apiKey: API_KEY
         });
 
-        const skillTopic = "Java";
-        const numDays = 10;
-        var prompt = "Give me a plan with resources to learn " + skillTopic + " in " + numDays + " days in a table format. The table should have four columns. The first column should include the day number (say including the word Day in each row), the second column should include the topic, the third column should include multiple resources with specific links and titles, and the fourth column should include multiple tasks. The second column should only include the topic to be learned. The third column should only include multiple recommended resources to learn that topic. The fourth column should only include the multiple tasks that should be taken to learn the corresponding topic for each day. Give an equal amount of tasks and resources but make sure to give multiple. Please surround strings with double quotes. Please use real links. Set the temperature setting to 0.1.";
-        console.log("hey lol")
+        var prompt = `Give me a plan with resources to learn ${skillTopic} in ${numDays} days in a table format. The table should have four columns. The first column should include the day number (say including the word Day in each row), the second column should include the topic, the third column should include multiple resources with specific links and titles, and the fourth column should include multiple tasks. The second column should only include the topic to be learned. The third column should only include multiple recommended resources to learn that topic. The fourth column should only include the multiple tasks that should be taken to learn the corresponding topic for each day. Give an equal amount of tasks and resources but make sure to give multiple. Please surround strings with double quotes. Please make sure to include and use real links. Set the temperature setting to 0.1.`;
+
         const chatCompletion = await openai.chat.completions.create({
             model: "gpt-3.5-turbo",
             messages: [{ role: "user", content: prompt }],
@@ -44,10 +42,12 @@ class RoadMapper {
 }
 
 app.post('/', async (req, res) => {
+    const { skillTopic, numDays } = req.body;  // Extracting values from POST request body
+
     const chatProcessor = new RoadMapper();
 
     try {
-        const result = await chatProcessor.processChat();
+        const result = await chatProcessor.processChat(skillTopic, numDays);  // Passing the values as arguments here
         res.json({ data: result });
     } catch (error) {
         res.status(500).json({ error: 'Failed to process chat.' });
