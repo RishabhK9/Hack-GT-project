@@ -97,6 +97,7 @@ input[type="number"] {
     color: #ffc55a;
     font-size: 60px;
     font-weight: bold;
+    padding-bottom: 20px;
 }
 /* Add styles for the pop-up window */
 .popup-container {

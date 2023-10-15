@@ -16,10 +16,10 @@
     <header class="header">
         <div class="container">
             <h1>Your Personalized Learning Schedule:</h1>
-            <div id="checkboxCount">
-                Total Checkboxes: <span id="totalCheckValue">0</span>, Checked: <span id="checkedValue">0</span>
-            </div>
             <div><span id="skill"></span></div>
+            <div id="checkboxCount">
+                Total Checkpoints: <span id="totalCheckValue">0</span>, Completed: <span id="checkedValue">0</span>
+            </div>
         </div>
     </header>
     <main>
@@ -80,11 +80,11 @@
     var output = JSON.parse(localStorage.getItem('output'));
     console.log(output);
 
-    for (let i = 1; i <= numDays; i++) {
+    for (let i = 0; i < numDays; i++) {
         const box = document.createElement("button"); // Create a button element
         box.className = "box";
-        box.textContent = "Day " + i;
-        console.log(output[i]);
+        box.textContent = "Day " + (i+1);
+        console.log(output[0]);
 
         // Add a click event to open the day detail
         box.addEventListener("click", function () {
@@ -99,7 +99,7 @@
             const topPosition = (screenHeight - popupHeight) / 2;
 
             // Open the pop-up window
-            const dayDetailContent = "Details for Day " + i;
+            const dayDetailContent = "Details for Day " + (i+1);
             const popupWindow = window.open("", "DayDetails", `width=${popupWidth}, height=${popupHeight}, left=${leftPosition}, top=${topPosition}`);
             // Write the content into the pop-up window
             popupWindow.document.write(`<h2 style="text-align: center; font-size: 40px; font-family: helvetica;">${output[i][1]}</h2>`);
