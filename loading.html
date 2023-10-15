@@ -8,8 +8,8 @@
         document.addEventListener("DOMContentLoaded", async function () {
             console.log("Sending data to the server...");
 
-            var skillTopic = "Java";
-            var numDays = 10;
+            var skillTopic = localStorage.getItem('skill');
+            var numDays = localStorage.getItem('days');
 
             try {
                 const response = await fetch('http://localhost:3000', {
