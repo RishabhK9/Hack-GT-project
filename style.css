@@ -9,34 +9,77 @@ body {
     height: 100vh;
     margin: 0;
     font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-    background-color: #f2f2f2;
     margin: 0;
     padding: 0;
-    color: #333;
+    color: #ffd994;
     font-family: var(--header-font);
+
+    background: rgb(255,117,116);
+background: radial-gradient(circle, rgba(255,117,116,1) 35%, rgba(255,201,104,1) 100%);
 }
 :root {
     --header-font: 'HK Grotesk', Roboto, -apple-system, BlinkMacSystemFont, 'Segoe UI', Oxygen, Ubuntu, Cantarell, 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
 }
+input[type="text"] {
+  background-color: #ffd994; /* Background color */
+  border-radius: 10px; /* Rounded corners */
+  border-color: #ffc55a;
+  padding: 5px;
+}
+
+/* Style the placeholder text for input boxes */
+input[type="text"]::placeholder {
+  color: #aa8000; /* Darker yellow color for the placeholder text */
+}
 
 #header {
-    font-family: var(--header-font);
-    color: #333;
+  font-family: var(--header-font);
+  color: white;
+  font-size: var(--header-text-size);
+  text-align: center;
+  margin-top: 20px;
+  animation: welcomeAnimation 2s ease-in-out; /* Add animation */
+}
+
+/* Define the animation keyframes */
+@keyframes welcomeAnimation {
+  0% {
+      transform: scale(1); /* Initial scale */
+      opacity: 0; /* Start with 0% opacity */
+  }
+  50% {
+      transform: scale(1.2); /* Scale up to 120% size */
+      opacity: 1; /* Reach 100% opacity */
+  }
+  100% {
+      transform: scale(1); /* Return to normal scale */
+      opacity: 1; /* Maintain 100% opacity */
+  }
 }
 
 .nav-bar {
+    background-color: #fff3db;
+    color: #f38d6a;
+    height: 50px;
     margin: 0;
+    position: fixed; /* Position the navigation bar at the top */
+    top: 0; /* Stick it to the top */
+    left: 0; /* Align it to the left */
+    width: 100%; /* Make it span the entire width */
+    display: flex;
+    align-items: center;
   }
-  
   .nav-bar a {
     text-decoration: none;
-    color: black;
+    color: #ff7574;
+    margin-left: 40px;
     font-weight: bolder;
     font-family: sans-serif;
+    
   }
   
   .nav-bar a:hover {
-    color: #ff7574;
+    color: #ffd994;
     transition: color 0.3s;
   }
   
@@ -45,6 +88,7 @@ body {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    padding: 0;
   }
   
   .nav-bar li {
@@ -70,7 +114,7 @@ h1{
 
 .loader {
     border: 6px solid #ffc55a;
-    border-top: 6px solid #ff7574;
+    border-top: 6px solid white;
     border-radius: 50%;
     margin-left: 100px;
     width: 30px;
@@ -82,9 +126,40 @@ p {
     font-size: 16px;
     color: #555;
 }
+img {
+  max-width: 160px; /* Adjust the width as needed */
+  margin-bottom: 20px; /* Adjust the margin as needed */
 
+}
 @keyframes spin {
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
 }
+#form{
+  font-size: 30px;
+  font-weight: bold;
+  max-width: 75%; /* Limit the width to 75% of the page */
+  margin: 0 auto; /* Center the form horizontally */  text-align: center;
+}
+#form button[type="submit"] {
+  margin-top: 20px;
+  font-size: 24px; /* Adjust the font size as needed */
+  font-weight: bold;
+  background-color: white;
+  color: #ff7574;
+  border-color: #ffd994;
+  border-radius: 10px; /* Makes the button rounder */
+  padding: 10px 20px; /* Increase padding for a larger button */
+  cursor: pointer; /* Change cursor to a pointer on hover */
+  transition: background-color 0.3s, color 0.3s; /* Smooth color transition on hover */
+  margin: 20px auto 0 auto; /* Add margin-top of 20px */
 
+  /* Center the button horizontally */
+  display: block;
+  margin: 0 auto;
+}
+
+#form button[type="submit"]:hover {
+  background-color: #ffc55a; /* Change background color on hover */
+  color: white; /* Change text color on hover */
+}

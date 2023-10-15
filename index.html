@@ -7,12 +7,17 @@
     <ul class="nav-bar" id="nav">
         <div class="links">
           <li><a href="index.html">Home</a></li>
-          <li><a href="progress.html">Your Progress</a></li>
+          <li><a href="progress.html">Your Skills</a></li>
           <li><a href="#">About Us</a></li>
         </div>
       </ul>
-
+      <div class="container">
+    <div id = "header">
+        <img src="logo1.png" alt="Logo">
         <h1>SkillMap</h1>
+    </div>
+
+        </div>
         <form id ="form">
             <!-- First Input Box -->
             <label for="skill">I want to learn</label>
@@ -20,14 +25,15 @@
             
             <!-- Second Input Box -->
             <label for="hours">with a time commitment of</label>
-            <input type="text" id="hours" name="hours" placeholder="Enter number of hours per day">
+            <input type="text" id="hours" name="hours" style="width: 250px;" placeholder="Enter number of hours per day">
             
             <!-- Third Input Box -->
             <label for="days">in</label>
-            <input type="days" id="days" name="days" placeholder="Enter number of days">
+            <input type="text" id="days" name="days" placeholder="Enter number of days">
+            <label for="days">days.</label> 
 
             <!-- Generate Button -->
-            <button type="submit">Generate</button>
+            <button type="submit" style="margin-top: 20px;">Generate</button>
         </form>
         <script>
     

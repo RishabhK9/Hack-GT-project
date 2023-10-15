@@ -20,15 +20,40 @@
         <!-- Left Section - Display User Inputted Skill -->
         <div class="left-section">
             <h2>Your Skill: <span id="userSkill"></span></h2>
+            <div id="your-skill">
+            </div>
         </div>
 
         <!-- Right Section - Progress Bar -->
         <div class="right-section">
             <h2>Progress Bar</h2>
-            <div class="progress-bar">
-                <div class="progress" id="progress">0%</div>
+            <div class="progress-container">
+                <div class="progress-bar" id="progress-bar"></div>
             </div>
+
         </div>
     </div>
+    <script>// Get the progress bar element
+        // Retrieve the skill value from localStorage
+const skill = localStorage.getItem('skill');
+
+// Update the content of the "your-skill" div with the skill variable
+const skillDisplay = document.getElementById('your-skill');
+skillDisplay.textContent = skill;
+
+
+
+        const progressBar = document.getElementById('progress-bar');
+        
+        // Define your variables
+        const checked = 50; // Replace with your value
+        const totalCheck = 100; // Replace with your value
+        
+        // Calculate the percentage
+        const percent = (checked / totalCheck) * 100;
+        
+        // Set the progress width in CSS custom property
+        document.documentElement.style.setProperty('--progress-width', percent + '%');
+        </script>
 </body>
 </html>

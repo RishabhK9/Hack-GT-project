@@ -99,15 +99,19 @@
             const popupWindow = window.open("", "DayDetails", `width=${popupWidth}, height=${popupHeight}, left=${leftPosition}, top=${topPosition}`);
             
             // Write the content into the pop-up window
-            popupWindow.document.write('<h2 style="text-align: center;">Topic</h2>');
+            popupWindow.document.write('<h2 style="text-align: center; font-size: 40px; font-family: helvetica;">Topic</h2>'); // Adjust font size and font-family
             popupWindow.document.write('<div style="display: flex;">');
             popupWindow.document.write('<div style="width: 50%; text-align: center;">');
-            popupWindow.document.write('<h3>Tasks</h3>');
+            popupWindow.document.write('<h3 style="font-size: 30px; font-weight: bold; font-family: helvetica;">Tasks</h3>'); // Adjust font size and font-family
             
             for (let taskIndex = 1; taskIndex <= 2; taskIndex++) {
                 const isChecked = getCheckboxState(i, taskIndex);
                 // Add checkboxes for tasks
-                popupWindow.document.write(`<label><input type="checkbox" id="day${i}task${taskIndex}" ${isChecked ? "checked" : ""}> do this work!</label><br>`);
+                popupWindow.document.write('<label style="font-size: 24px; font-family: helvetica;">');
+                popupWindow.document.write(`<input type="checkbox" id="day${i}task${taskIndex}" ${isChecked ? "checked" : ""}> do this work!`);
+                popupWindow.document.write('</label><br>');
+                popupWindow.document.body.style.backgroundColor = "#FFD994";
+
                 
                 // Add an event listener to save checkbox state
                 const checkbox = popupWindow.document.getElementById(`day${i}task${taskIndex}`);
@@ -125,12 +129,14 @@
             
             popupWindow.document.write('</div>');
             popupWindow.document.write('<div style="width: 50%; text-align: center;">');
-            popupWindow.document.write('<h3>Resources</h3>');
+            popupWindow.document.write('<h3 style="font-size: 30px; font-weight: bold; font-family: helvetica;">Resources</h3>'); // Adjust font size and font-family
             
             for (let taskIndex = 3; taskIndex <= 4; taskIndex++) {
                 const isChecked = getCheckboxState(i, taskIndex);
                 // Add checkboxes for resources
-                popupWindow.document.write(`<label><input type="checkbox" id="day${i}task${taskIndex}" ${isChecked ? "checked" : ""}> do this work!</label><br>`);
+                popupWindow.document.write('<label style="font-size: 24px; font-family: helvetica;">');
+                popupWindow.document.write(`<input type="checkbox" id="day${i}task${taskIndex}" ${isChecked ? "checked" : ""}> do this work!`);
+                popupWindow.document.write('</label><br>');
                 
                 // Add an event listener to save checkbox state
                 const checkbox = popupWindow.document.getElementById(`day${i}task${taskIndex}`);
@@ -150,7 +156,14 @@
             popupWindow.document.write('</div>');
 
             // Add a close button in the pop-up
-            popupWindow.document.write('<button onclick="window.close()">Close</button>');
+            popupWindow.document.write('<div style="text-align: center; margin-top: 90px;">');
+            popupWindow.document.write('<button id="closeButton" style="background-color: #ff7574; color: white; border: none; border-radius: 5px; padding: 10px 20px; font-size: 16px; cursor: pointer;">Close</button>');
+            popupWindow.document.write('</div>');
+
+            // Add an event listener to close the pop-up window when the button is clicked
+            popupWindow.document.getElementById("closeButton").addEventListener("click", function() {
+            popupWindow.close();
+            });      
         });
 
         boxContainer.appendChild(box);
