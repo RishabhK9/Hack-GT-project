@@ -3,7 +3,7 @@ import OpenAI from 'openai';
 class RoadMapper {
   async processChat() {
       const openai = new OpenAI({
-          apiKey: "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"
+          apiKey: API_KEY
       });
       console.log("iterating processChat");
       var skillTopic = "Java";
