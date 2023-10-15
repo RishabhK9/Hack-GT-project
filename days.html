@@ -77,6 +77,9 @@
     const boxContainer = document.getElementById("boxContainer");
     boxContainer.innerHTML = "";
 
+    var output = JSON.parse(localStorage.getItem('output'));
+    console.log(output);
+
     for (let i = 1; i <= numDays; i++) {
         const box = document.createElement("button"); // Create a button element
         box.className = "box";
@@ -97,9 +100,9 @@
             // Open the pop-up window
             const dayDetailContent = "Details for Day " + i;
             const popupWindow = window.open("", "DayDetails", `width=${popupWidth}, height=${popupHeight}, left=${leftPosition}, top=${topPosition}`);
-            
+            console.log(`${localStorage.getItem('output')[i][1]}`);
             // Write the content into the pop-up window
-            popupWindow.document.write(`<h2 style="text-align: center; font-size: 40px; font-family: helvetica;">${localStorage.getItem('output')[i][1]}</h2>`);
+            popupWindow.document.write(`<h2 style="text-align: center; font-size: 40px; font-family: helvetica;">${output[i][1]}</h2>`);
             // Adjust font size and font-family
             popupWindow.document.write('<div style="display: flex;">');
             popupWindow.document.write('<div style="width: 50%; text-align: center;">');
@@ -109,7 +112,7 @@
                 const isChecked = getCheckboxState(i, taskIndex);
                 // Add checkboxes for tasks
                 popupWindow.document.write('<label style="font-size: 24px; font-family: helvetica;">');
-                popupWindow.document.write(`<input type="checkbox" id="day${i}task${taskIndex}" ${isChecked ? "checked" : ""}> ${localStorage.getItem('output')[i][2]}`);
+                popupWindow.document.write(`<input type="checkbox" id="day${i}task${taskIndex}" ${isChecked ? "checked" : ""}> ${output[i][2]}`);
                 popupWindow.document.write('</label><br>');
                 popupWindow.document.body.style.backgroundColor = "#FFD994";
 
@@ -136,7 +139,7 @@
                 const isChecked = getCheckboxState(i, taskIndex);
                 // Add checkboxes for resources
                 popupWindow.document.write('<label style="font-size: 24px; font-family: helvetica;">');
-                popupWindow.document.write(`<input type="checkbox" id="day${i}task${taskIndex}" ${isChecked ? "checked" : ""}> ${localStorage.getItem('output')[i][3]}`);
+                popupWindow.document.write(`<input type="checkbox" id="day${i}task${taskIndex}" ${isChecked ? "checked" : ""}> ${output[i][3]}`);
                 popupWindow.document.write('</label><br>');
                 
                 // Add an event listener to save checkbox state

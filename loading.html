@@ -26,10 +26,11 @@
                 }
 
                 const data = await response.json();
-                localStorage.setItem('ouput', data);
+                localStorage.setItem('output', JSON.stringify(data));
                 // Process the received data as needed
                 console.log(data);
-                window.location.href = "days.html"
+                window.location.href = "days.html";
+
 
             } catch (error) {
                 console.log("There was a problem with the fetch operation:", error.message);
